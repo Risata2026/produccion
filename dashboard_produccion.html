@@ -734,9 +734,9 @@
               <th class="num">g/cajón</th><th class="num">Cajones por amasijo</th><th class="num">Masa usada (kg)</th>
             </tr></thead>
             <tbody>
-              <tr><td><strong>Masa Estándar × 6</strong></td><td class="num">230</td><td class="num">6</td><td class="num">1,380</td><td class="num">18</td><td class="num">24.84</td></tr>
-              <tr><td><strong>Panino × 6</strong></td><td class="num">160</td><td class="num">6</td><td class="num">960</td><td class="num">26</td><td class="num">24.96</td></tr>
-              <tr><td><strong>La Grosa × 3</strong></td><td class="num">430</td><td class="num">3</td><td class="num">1,290</td><td class="num">18</td><td class="num">23.22</td></tr>
+              <tr><td><strong>Masa Estándar × 6</strong></td><td class="num">230</td><td class="num">6</td><td class="num">1,380</td><td class="num">16</td><td class="num">22.08</td></tr>
+              <tr><td><strong>Panino × 6</strong></td><td class="num">160</td><td class="num">6</td><td class="num">960</td><td class="num">23</td><td class="num">22.08</td></tr>
+              <tr><td><strong>La Grosa × 3</strong></td><td class="num">430</td><td class="num">3</td><td class="num">1,290</td><td class="num">17</td><td class="num">21.93</td></tr>
             </tbody>
           </table>
         </div>
@@ -1594,9 +1594,9 @@ function handleFile(input) {
 // CALCULADORA AMASIJOS
 // ══════════════════════════════════════════════════
 const MASAS = {
-  std:    { label: 'Masa Estándar × 6', gPorBollo: 230, bollosPorCajon: 6, cajonesReales: 18 },
-  panino: { label: 'Panino × 6',        gPorBollo: 160, bollosPorCajon: 6, cajonesReales: 26 },
-  grosa:  { label: 'La Grosa × 3',      gPorBollo: 430, bollosPorCajon: 3, cajonesReales: 18 },
+  std:    { label: 'Masa Estándar × 6', gPorBollo: 230, bollosPorCajon: 6, cajonesReales: 16 },
+  panino: { label: 'Panino × 6',        gPorBollo: 160, bollosPorCajon: 6, cajonesReales: 23 },
+  grosa:  { label: 'La Grosa × 3',      gPorBollo: 430, bollosPorCajon: 3, cajonesReales: 17 },
 };
 const KG_AMASIJO = 28;
 const KG_HARINA  = 14;
@@ -2132,6 +2132,7 @@ function renderComprasEvolucion(regs) {
 // Aplicado cuando el insumo se compra en unidades (bolsas, latas, cabezas, etc.)
 const FACTOR_COMPRA_KG = {
   'Harina Orgánica':    25.0,   // bolsa 25kg
+  'Harina Almendra':     5.0,   // bolsa 5kg
   'Tomate Gustarosso':   2.5,   // lata 2.5kg
   'Tomate Corper':       2.93,  // lata ~2.93kg
   'Hongo de Pino':       1.0,   // bolsa 1kg
@@ -2195,9 +2196,15 @@ const CONSUMO_MAP = {
   ],
   // ── ELABORADOS CON RECETA ──
   'Harina Orgánica': [
-    { producto: 'Masas - contenedor x 6 unidades',          tipo: 'receta', kg_por_unid: 1.38 * (12.345/46) },
-    { producto: 'Masa Panino x 6 unidades',                 tipo: 'receta', kg_por_unid: 0.96 * (12.345/46) },
-    { producto: 'Masas La Grosa - contenedor x 3 unidades', tipo: 'receta', kg_por_unid: 1.29 * (12.345/46) },
+    // Receta: 14kg harina total (7kg directa + 7kg en biga) por amasijo → 98 bollos
+    // Factor: 14/98 = 0.14286 kg harina por bollo
+    // Estándar: 6 bollos × 0.14286 = 0.857 kg/cajón
+    { producto: 'Masas - contenedor x 6 unidades',          tipo: 'receta', kg_por_unid: 6 * (14/98) },
+    // Panino: 6 bollos × 0.14286 = 0.857 kg/cajón
+    { producto: 'Masa Panino x 6 unidades',                 tipo: 'receta', kg_por_unid: 6 * (14/98) },
+    // La Grosa: 3 bollos × 0.14286 = 0.429 kg/cajón
+    { producto: 'Masas La Grosa - contenedor x 3 unidades', tipo: 'receta', kg_por_unid: 3 * (14/98) },
+    // Almendrata usa harina de almendra (separado), no orgánica
   ],
   'Tomate Gustarosso': [
     { producto: 'Salsa - 3kg',        tipo: 'receta', kg_por_unid: (3/23) * 11.5 },
@@ -2208,6 +2215,13 @@ const CONSUMO_MAP = {
     { producto: 'Salsa - 3kg',        tipo: 'receta', kg_por_unid: (3/23) * 11.5 },
     { producto: 'Salsa - cont.x 7kg', tipo: 'receta', kg_por_unid: (7/23) * 11.5 },
     { producto: 'Salsa x Kg',         tipo: 'receta', kg_por_unid: (1/23) * 11.5 },
+  ],
+  'Harina Almendra': [
+    // Almendrata: misma lógica que orgánica pero con harina de almendra
+    // Receta: usa levadura directa (no biga). Harina almendra 7kg → rinde ~44kg masa
+    // Factor: 7/44 = 0.159 kg harina almendra por bollo (bollos de ~160g)
+    { producto: 'Masa Piegatina - contenedor x 6 unidades', tipo: 'receta', kg_por_unid: 6 * (7/44) },
+    { producto: 'Harina de Almendra x 5 kg',                tipo: 'directo', kg_por_unid: 5.0 },
   ],
   'Hongo de Pino': [
     { producto: 'Reduccion Hongos 1kg',   tipo: 'receta', kg_por_unid: 0.3/0.95 },
@@ -2264,7 +2278,7 @@ function renderBalance(regsCompras) {
   Object.entries(CONSUMO_MAP).forEach(([insumo, usos]) => {
     // Comprado en el período — convertir a kg usando factor si aplica
     const factor = FACTOR_COMPRA_KG[insumo] || 1.0;
-    const comprado = regsCompras.filter(r => r.i === insumo).reduce((s,r) => s + r.q * factor, 0);
+    const comprado = regsCompras.filter(r => r.i === insumo || r.i.toLowerCase() === insumo.toLowerCase()).reduce((s,r) => s + r.q * factor, 0);
 
     // Consumo teórico por destino
     let consumoDirecto = 0;
