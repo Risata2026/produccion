@@ -2128,13 +2128,37 @@ function renderComprasEvolucion(regs) {
 // kg_por_pote / potes_por_prep: para productos elaborados por pote
 // via_elaborado: el insumo llega al destino a través de una elaboración
 
+// Factor de conversión: unidades de compra → kg
+// Aplicado cuando el insumo se compra en unidades (bolsas, latas, cabezas, etc.)
+const FACTOR_COMPRA_KG = {
+  'Harina Orgánica':    25.0,   // bolsa 25kg
+  'Tomate Gustarosso':   2.5,   // lata 2.5kg
+  'Tomate Corper':       2.93,  // lata ~2.93kg
+  'Hongo de Pino':       1.0,   // bolsa 1kg
+  'Garbanzo':            0.3,   // lata 300g
+  'Aceite Girasol':      9.0,   // bidón 10L ≈ 9kg
+  'Albahaca':            0.05,  // paquete ~50g
+  'Rúcula':              0.1,   // paquete ~100g
+  'Nueces':              1.0,   // bolsa 1kg
+  'Ajo':                 0.05,  // cabeza ~50g
+  // Los siguientes ya vienen en kg, factor = 1
+  'Muzzarella':          1.0,
+  'Cuartirolo':          1.0,
+  'Jamón Cocido':        1.0,
+  'Panceta':             1.0,
+  'Provoleta':           1.0,
+  'Sardo Estacionado':   1.0,
+  'Salame':              1.0,
+  'Pepperoni':           1.0,
+};
+
 const CONSUMO_MAP = {
-  // ── DESPACHOS DIRECTOS (kg de insumo = unidades × factor) ──
+  // ── DESPACHOS DIRECTOS ──
   'Muzzarella': [
-    { producto: 'Muzza x 4 kg',      tipo: 'directo', kg_por_unid: 2.8 },
+    { producto: 'Muzza x 4 kg aprox.', tipo: 'directo', kg_por_unid: 2.8 },
   ],
   'Cuartirolo': [
-    { producto: 'Muzza x 4 kg',      tipo: 'directo', kg_por_unid: 1.2 },
+    { producto: 'Muzza x 4 kg aprox.', tipo: 'directo', kg_por_unid: 1.2 },
   ],
   'Muzza Vegana': [
     { producto: 'Muzza Vegana x 1.5 kg', tipo: 'directo', kg_por_unid: 1.5 },
@@ -2144,59 +2168,55 @@ const CONSUMO_MAP = {
     { producto: 'Jamon Cocido x 500gr', tipo: 'directo', kg_por_unid: 0.5 },
   ],
   'Panceta': [
-    { producto: 'Panceta x 3 kg',   tipo: 'directo', kg_por_unid: 3.0 },
-    { producto: 'Panceta x 500gr',  tipo: 'directo', kg_por_unid: 0.5 },
+    // merma de corte 33.68% → factor 1/0.6632 = 1.5078
+    { producto: 'Panceta x 3 kg',  tipo: 'directo', kg_por_unid: 3.0 * 1.5078 },
+    { producto: 'Panceta x 500gr', tipo: 'directo', kg_por_unid: 0.5 * 1.5078 },
   ],
   'Provoleta': [
     { producto: 'Provolone x 4 kg aprox.', tipo: 'directo', kg_por_unid: 4.0 },
     { producto: 'Provolone x 500gr',       tipo: 'directo', kg_por_unid: 0.5 },
     { producto: 'Provo cubos 500gr',       tipo: 'directo', kg_por_unid: 0.5 },
+    { producto: 'Provoleta Ahumada x 700 grs', tipo: 'directo', kg_por_unid: 0.7 },
   ],
   'Sardo Estacionado': [
-    { producto: 'Sardo x 2 kg aprox.', tipo: 'directo', kg_por_unid: 2.0 },
-    { producto: 'Sardo x 500gr',       tipo: 'directo', kg_por_unid: 0.5 },
-    // También va al Pesto Verde (0.5kg por prep de 45 potes)
-    { producto: 'Pesto verde x 300g',  tipo: 'receta',  kg_por_unid: 0.5/45 },
-    { producto: 'Pesto verde x 500gr', tipo: 'receta',  kg_por_unid: 0.5/45 },
+    // merma de corte 8.57% → factor 1/0.9143 = 1.0937
+    { producto: 'Sardo x 2 kg aprox.', tipo: 'directo', kg_por_unid: 2.0 * 1.0937 },
+    { producto: 'Sardo x 500gr',       tipo: 'directo', kg_por_unid: 0.5 * 1.0937 },
+    { producto: 'Pesto verde x 300g',  tipo: 'receta',  kg_por_unid: (0.5/45) * 1.0937 },
+    { producto: 'Pesto verde x 500gr', tipo: 'receta',  kg_por_unid: (0.5/45) * 1.0937 },
   ],
   'Salame': [
-    { producto: 'Salame x 1.5kg',  tipo: 'directo', kg_por_unid: 1.5 },
-    { producto: 'Salame x 500gr',  tipo: 'directo', kg_por_unid: 0.5 },
+    // merma de corte 4.62% → factor 1/0.9538 = 1.0484
+    { producto: 'Salame x 1.5kg', tipo: 'directo', kg_por_unid: 1.5 * 1.0484 },
+    { producto: 'Salame x 500gr', tipo: 'directo', kg_por_unid: 0.5 * 1.0484 },
   ],
   'Pepperoni': [
     { producto: 'Peperoni x 1 KG', tipo: 'directo', kg_por_unid: 1.0 },
   ],
   // ── ELABORADOS CON RECETA ──
   'Harina Orgánica': [
-    // 1 cajón std x6 = 6×230g = 1.38kg masa; receta: 12.345kg harina → 46kg masa → 0.2683 kg harina/kg masa
     { producto: 'Masas - contenedor x 6 unidades',          tipo: 'receta', kg_por_unid: 1.38 * (12.345/46) },
     { producto: 'Masa Panino x 6 unidades',                 tipo: 'receta', kg_por_unid: 0.96 * (12.345/46) },
     { producto: 'Masas La Grosa - contenedor x 3 unidades', tipo: 'receta', kg_por_unid: 1.29 * (12.345/46) },
   ],
   'Tomate Gustarosso': [
-    // Salsa: 50% de 23kg por prep → 11.5kg Gustarosso
-    // Salsa 3kg: 3/23 de prep → 3/23 × 11.5 kg
-    { producto: 'Salsa - 3kg',       tipo: 'receta', kg_por_unid: (3/23) * 11.5 },
-    { producto: 'Salsa - cont.x 7kg',tipo: 'receta', kg_por_unid: (7/23) * 11.5 },
-    { producto: 'Salsa x Kg',        tipo: 'receta', kg_por_unid: (1/23) * 11.5 },
+    { producto: 'Salsa - 3kg',        tipo: 'receta', kg_por_unid: (3/23) * 11.5 },
+    { producto: 'Salsa - cont.x 7kg', tipo: 'receta', kg_por_unid: (7/23) * 11.5 },
+    { producto: 'Salsa x Kg',         tipo: 'receta', kg_por_unid: (1/23) * 11.5 },
   ],
   'Tomate Corper': [
-    { producto: 'Salsa - 3kg',       tipo: 'receta', kg_por_unid: (3/23) * 11.5 },
-    { producto: 'Salsa - cont.x 7kg',tipo: 'receta', kg_por_unid: (7/23) * 11.5 },
-    { producto: 'Salsa x Kg',        tipo: 'receta', kg_por_unid: (1/23) * 11.5 },
+    { producto: 'Salsa - 3kg',        tipo: 'receta', kg_por_unid: (3/23) * 11.5 },
+    { producto: 'Salsa - cont.x 7kg', tipo: 'receta', kg_por_unid: (7/23) * 11.5 },
+    { producto: 'Salsa x Kg',         tipo: 'receta', kg_por_unid: (1/23) * 11.5 },
   ],
   'Hongo de Pino': [
-    // 0.3kg hongo → 0.95kg reducción; Reducción 1kg = 0.3/0.95 kg hongo
     { producto: 'Reduccion Hongos 1kg',   tipo: 'receta', kg_por_unid: 0.3/0.95 },
     { producto: 'Reduccion Hongos 500 g', tipo: 'receta', kg_por_unid: (0.3/0.95)*0.5 },
   ],
   'Garbanzo': [
-    // 6 latas 300g por prep de 27 potes → 6×0.3/27 kg por pote
-    { producto: 'Hummus Garbanzo x 250g',tipo: 'receta', kg_por_unid: (6*0.3)/27 },
-    { producto: 'Dip Hummus Garbanzo',   tipo: 'receta', kg_por_unid: (6*0.3)/27 },
+    { producto: 'Dip Hummus de garbanzo x unidad', tipo: 'receta', kg_por_unid: (6*0.3)/27 },
   ],
   'Albahaca': [
-    // 1.2kg por prep de 45 potes
     { producto: 'Pesto verde x 300g',  tipo: 'receta', kg_por_unid: 1.2/45 },
     { producto: 'Pesto verde x 500gr', tipo: 'receta', kg_por_unid: 1.2/45 },
   ],
@@ -2205,27 +2225,21 @@ const CONSUMO_MAP = {
     { producto: 'Pesto verde x 500gr', tipo: 'receta', kg_por_unid: 0.6/45 },
   ],
   'Nueces': [
-    { producto: 'Pesto verde x 300g',  tipo: 'receta', kg_por_unid: 0.2/45 },
-    { producto: 'Pesto verde x 500gr', tipo: 'receta', kg_por_unid: 0.2/45 },
+    { producto: 'Nueces x 500gr',      tipo: 'directo', kg_por_unid: 0.5 },
+    { producto: 'Pesto verde x 300g',  tipo: 'receta',  kg_por_unid: 0.2/45 },
+    { producto: 'Pesto verde x 500gr', tipo: 'receta',  kg_por_unid: 0.2/45 },
   ],
   'Ajo': [
-    // Pasta de Ajo: receta 9 cabezas (~0.05kg c/u) → rinde 2kg → 0.45kg ajo/kg pasta
-    { producto: 'Pasta de Ajo x 1 kg', tipo: 'receta', kg_por_unid: 0.45 },
-    { producto: 'Pasta Ajo x500g',     tipo: 'receta', kg_por_unid: 0.225 },
-    // Hummus Garbanzo: 5 cabezas por prep de 27 potes
-    { producto: 'Hummus Garbanzo x 250g', tipo: 'receta', kg_por_unid: (5*0.05)/27 },
-    { producto: 'Dip Hummus Garbanzo',    tipo: 'receta', kg_por_unid: (5*0.05)/27 },
-    // Pesto: 4 cabezas por prep de 45 potes
-    { producto: 'Pesto verde x 300g',  tipo: 'receta', kg_por_unid: (4*0.05)/45 },
-    { producto: 'Pesto verde x 500gr', tipo: 'receta', kg_por_unid: (4*0.05)/45 },
+    { producto: 'Pasta de Ajo x 1 kg',    tipo: 'receta', kg_por_unid: 9*0.05/2 },
+    { producto: 'Pasta Ajo x500g',         tipo: 'receta', kg_por_unid: 9*0.05/4 },
+    { producto: 'Dip Hummus de garbanzo x unidad', tipo: 'receta', kg_por_unid: (5*0.05)/27 },
+    { producto: 'Pesto verde x 300g',      tipo: 'receta', kg_por_unid: (4*0.05)/45 },
+    { producto: 'Pesto verde x 500gr',     tipo: 'receta', kg_por_unid: (4*0.05)/45 },
   ],
   'Aceite Girasol': [
-    // Hummus Garbanzo: 0.14kg por prep de 27 potes
-    { producto: 'Hummus Garbanzo x 250g', tipo: 'receta', kg_por_unid: 0.14/27 },
-    { producto: 'Dip Hummus Garbanzo',    tipo: 'receta', kg_por_unid: 0.14/27 },
-    // Pasta de Ajo: 0.25kg por prep → rinde 2kg → 0.125kg aceite/kg pasta
-    { producto: 'Pasta de Ajo x 1 kg', tipo: 'receta', kg_por_unid: 0.125 },
-    { producto: 'Pasta Ajo x500g',     tipo: 'receta', kg_por_unid: 0.0625 },
+    { producto: 'Dip Hummus de garbanzo x unidad', tipo: 'receta', kg_por_unid: 0.14/27 },
+    { producto: 'Pasta de Ajo x 1 kg',    tipo: 'receta', kg_por_unid: 0.25/2 },
+    { producto: 'Pasta Ajo x500g',         tipo: 'receta', kg_por_unid: 0.25/4 },
   ],
 };
 
@@ -2248,8 +2262,9 @@ function renderBalance(regsCompras) {
   // Para cada insumo en CONSUMO_MAP: calcular consumo teórico
   const resultados = [];
   Object.entries(CONSUMO_MAP).forEach(([insumo, usos]) => {
-    // Comprado en el período
-    const comprado = regsCompras.filter(r => r.i === insumo).reduce((s,r) => s + r.q, 0);
+    // Comprado en el período — convertir a kg usando factor si aplica
+    const factor = FACTOR_COMPRA_KG[insumo] || 1.0;
+    const comprado = regsCompras.filter(r => r.i === insumo).reduce((s,r) => s + r.q * factor, 0);
 
     // Consumo teórico por destino
     let consumoDirecto = 0;
