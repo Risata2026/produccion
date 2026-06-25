@@ -2370,6 +2370,8 @@ function renderBalance(regsCompras) {
     const ratioStr = r.ratio !== null ? r.ratio.toFixed(2) : '—';
     return `<tr style="background:${sem.bg}">
       <td><strong>${r.insumo}</strong></td>
+      <td class="num">${fmtQ(r.compradoUnidades)}</td>
+      <td style="font-size:11px;color:var(--gris-sub)">${r.unidadLabel}</td>
       <td class="num">${fmtQ(r.comprado)}</td>
       <td class="num">${r.consumoDirecto > 0 ? fmtQ(r.consumoDirecto) : '-'}</td>
       <td class="num">${r.consumoReceta > 0 ? fmtQ(r.consumoReceta) : '-'}</td>
