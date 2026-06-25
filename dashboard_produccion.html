@@ -944,13 +944,20 @@
 // ══════════════════════════════════════════════════
 </script>
 <script>
-// Cache busting automático — fuerza descarga fresca cada día
+// Cache busting — carga secuencial esperando que cada JS esté listo
 (function() {
   var v = new Date().toISOString().slice(0,10).replace(/-/g,'');
-  ['fabrica_data.js','compras_data.js'].forEach(function(src) {
-    var s = document.createElement('script'); 
+  function loadScript(src, cb) {
+    var s = document.createElement('script');
     s.src = src + '?v=' + v;
+    s.onload = cb;
     document.head.appendChild(s);
+  }
+  loadScript('fabrica_data.js', function() {
+    loadScript('compras_data.js', function() {
+      // Ambos JS cargados — arrancar la app
+      init();
+    });
   });
 })();
 </script>
@@ -2386,8 +2393,7 @@ function renderBalance(regsCompras) {
 document.getElementById('s-cliente').addEventListener('change', renderSemana);
 document.getElementById('s-categoria').addEventListener('change', renderSemana);
 
-// ── ARRANCAR ──────────────────────────────────────
-init();
+// ── ARRANCAR — se llama desde el loader de JS externos ──────────────
 </script>
 </body>
 </html>
