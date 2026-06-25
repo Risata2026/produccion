@@ -965,7 +965,7 @@
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
 // ══════════════════════════════════════════════════
-let DATA = FABRICA_DATA;
+let DATA = null;
 let semanaActual = null; // {año, semana}
 
 const DIAS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
@@ -1061,6 +1061,7 @@ function fmtQ(n) {
 // INIT
 // ══════════════════════════════════════════════════
 function init() {
+  DATA = FABRICA_DATA;
   // Poblar selects de clientes
   ['r-cliente','s-cliente'].forEach(id => {
     const sel = document.getElementById(id);
