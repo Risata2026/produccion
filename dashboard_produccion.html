@@ -2140,26 +2140,48 @@ function renderComprasEvolucion(regs) {
 // Factor de conversión: unidades de compra → kg
 // Aplicado cuando el insumo se compra en unidades (bolsas, latas, cabezas, etc.)
 const FACTOR_COMPRA_KG = {
-  'Harina Orgánica':    25.0,   // bolsa 25kg
-  'Harina Almendra':     5.0,   // bolsa 5kg
-  'Tomate Gustarosso':   2.5,   // lata 2.5kg
-  'Tomate Corper':       2.93,  // lata ~2.93kg
-  'Hongo de Pino':       1.0,   // bolsa 1kg
-  'Garbanzo':            0.3,   // lata 300g
-  'Aceite Girasol':      9.0,   // bidón 10L ≈ 9kg
-  'Albahaca':            0.05,  // paquete ~50g
-  'Rúcula':              0.1,   // paquete ~100g
-  'Nueces':              1.0,   // bolsa 1kg
-  'Ajo':                 0.05,  // cabeza ~50g
-  // Los siguientes ya vienen en kg, factor = 1
-  'Muzzarella':          1.0,
-  'Cuartirolo':          1.0,
-  'Jamón Cocido':        1.0,
-  'Panceta':             1.0,
-  'Provoleta':           1.0,
-  'Sardo Estacionado':   1.0,
-  'Salame':              1.0,
-  'Pepperoni':           1.0,
+  'Harina Orgánica':    25.0,
+  'Harina Almendra':     5.0,
+  'Tomate Gustarosso':   2.5,
+  'Tomate Corper':       2.93,
+  'Hongo de Pino':       1.0,
+  'Garbanzo':            0.3,
+  'Aceite Girasol':      9.0,
+  'Albahaca':            1.0,   // se muestra en plantines, sin conversión a kg
+  'Rúcula':              0.1,
+  'Nueces':              1.0,
+  'Ajo':                 0.05,
+  'Muzzarella':          4.0,   // horma 4kg
+  'Cuartirolo':          4.0,   // horma 4kg
+  'Jamón Cocido':        4.0,   // pieza 4kg
+  'Panceta':             2.0,   // pieza 2kg
+  'Provoleta':           3.0,   // horma 3kg
+  'Sardo Estacionado':   5.0,   // horma 5kg
+  'Salame':              0.35,  // unidad ~350g
+  'Pepperoni':           0.88,  // unidad ~880g
+};
+
+// Etiquetas de unidad de compra para mostrar en balance
+const UNIDAD_COMPRA = {
+  'Harina Orgánica':   'bolsas 25kg',
+  'Harina Almendra':   'bolsas 5kg',
+  'Tomate Gustarosso': 'latas 2.5kg',
+  'Tomate Corper':     'latas ~2.93kg',
+  'Hongo de Pino':     'bolsas 1kg',
+  'Garbanzo':          'latas 300g',
+  'Aceite Girasol':    'bidones 10L',
+  'Albahaca':          'plantines',
+  'Rúcula':            'paquetes ~100g',
+  'Nueces':            'bolsas 1kg',
+  'Ajo':               'cabezas ~50g',
+  'Muzzarella':        'hormas 4kg',
+  'Cuartirolo':        'hormas 4kg',
+  'Jamón Cocido':      'piezas 4kg',
+  'Panceta':           'piezas 2kg',
+  'Provoleta':         'hormas 3kg',
+  'Sardo Estacionado': 'hormas 5kg',
+  'Salame':            'unidades ~350g',
+  'Pepperoni':         'unidades ~880g',
 };
 
 const CONSUMO_MAP = {
@@ -2285,9 +2307,12 @@ function renderBalance(regsCompras) {
   // Para cada insumo en CONSUMO_MAP: calcular consumo teórico
   const resultados = [];
   Object.entries(CONSUMO_MAP).forEach(([insumo, usos]) => {
-    // Comprado en el período — convertir a kg usando factor si aplica
+    // Comprado en el período — en unidades originales y en kg
     const factor = FACTOR_COMPRA_KG[insumo] || 1.0;
-    const comprado = regsCompras.filter(r => r.i === insumo || r.i.toLowerCase() === insumo.toLowerCase()).reduce((s,r) => s + r.q * factor, 0);
+    const regsInsumo = regsCompras.filter(r => r.i === insumo || r.i.toLowerCase() === insumo.toLowerCase());
+    const compradoUnidades = regsInsumo.reduce((s,r) => s + r.q, 0);
+    const comprado = regsInsumo.reduce((s,r) => s + r.q * factor, 0);
+    const unidadLabel = UNIDAD_COMPRA[insumo] || 'kg';
 
     // Consumo teórico por destino
     let consumoDirecto = 0;
@@ -2311,7 +2336,7 @@ function renderBalance(regsCompras) {
     if (comprado === 0 && consumoTotal === 0) return;
 
     const ratio = consumoTotal > 0 ? comprado / consumoTotal : null;
-    resultados.push({ insumo, comprado, consumoDirecto, consumoReceta, consumoTotal, ratio, desglose });
+    resultados.push({ insumo, comprado, compradoUnidades, unidadLabel, consumoDirecto, consumoReceta, consumoTotal, ratio, desglose });
   });
 
   resultados.sort((a,b) => b.comprado - a.comprado);
@@ -2330,10 +2355,12 @@ function renderBalance(regsCompras) {
   const tbody = document.querySelector('#tbl-balance tbody');
   thead.innerHTML = `<tr>
     <th>Insumo</th>
+    <th class="num">Comprado</th>
+    <th class="num">Unidad compra</th>
     <th class="num">Comprado (kg)</th>
     <th class="num">Consumo directo (kg)</th>
     <th class="num">Consumo en recetas (kg)</th>
-    <th class="num">Consumo teórico total (kg)</th>
+    <th class="num">Consumo teórico (kg)</th>
     <th class="num">Ratio</th>
     <th>Estado</th>
   </tr>`;
