@@ -4092,6 +4092,15 @@ const FABRICA_DATA = {
       "s": 23,
       "a": 2026,
       "c": "Nueva Córdoba",
+      "p": "Provoleta Ahumada x 700 grs",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-07",
+      "d": 6,
+      "s": 23,
+      "a": 2026,
+      "c": "Nueva Córdoba",
       "p": "Reduccion Hongos 500 g",
       "q": 1.0
     },
@@ -4128,7 +4137,25 @@ const FABRICA_DATA = {
       "s": 23,
       "a": 2026,
       "c": "Nueva Córdoba",
+      "p": "Salsa criolla 300 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-07",
+      "d": 6,
+      "s": 23,
+      "a": 2026,
+      "c": "Nueva Córdoba",
       "p": "Sardo x 2 kg aprox.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-07",
+      "d": 6,
+      "s": 23,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Vacio x 600 gr",
       "q": 2.0
     },
     {
@@ -4273,7 +4300,7 @@ const FABRICA_DATA = {
       "a": 2026,
       "c": "Campa",
       "p": "Masa Panino x 6 unidades",
-      "q": 3.0
+      "q": 2.0
     },
     {
       "f": "2026-06-09",
@@ -4282,7 +4309,7 @@ const FABRICA_DATA = {
       "a": 2026,
       "c": "Campa",
       "p": "Masas - contenedor x 6 unidades",
-      "q": 20.0
+      "q": 9.0
     },
     {
       "f": "2026-06-09",
@@ -4291,7 +4318,7 @@ const FABRICA_DATA = {
       "a": 2026,
       "c": "Campa",
       "p": "Muzza x 4 kg aprox.",
-      "q": 5.0
+      "q": 4.0
     },
     {
       "f": "2026-06-09",
@@ -4346,6 +4373,2040 @@ const FABRICA_DATA = {
       "c": "Campa",
       "p": "Sardo x 500gr",
       "q": 2.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Almendrata x 6 U.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Gorgonzola x 1/2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masa Panino x 6 unidades",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 33.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 7.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Panceta x 3 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pesto verde x 300g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Provoleta Ahumada x 700 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa - 3kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa criolla 300 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Vacio x 600 gr",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Almendrata x 6 U.",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Berenjena x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Pesto x unidad",
+      "q": 15.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Picante x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masa Panino x 6 unidades",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 41.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Miel picante x 1kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Panceta x 3 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Peperoni x 1 KG",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Provoleta Ahumada x 700 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Reduccion Hongos 500 g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salsa - cont.x 7kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-10",
+      "d": 2,
+      "s": 24,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Vacio x 600 gr",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Almendrata x 6 U.",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Gorgonzola x 1/2 kg aprox.",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masa Panino x 6 unidades",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 66.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 15.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Panceta x 3 kg",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Pasta de Ajo x 1 kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Peperoni x 1 KG",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Pesto verde x 300g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Provoleta Ahumada x 700 grs",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Provolone x 4 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Reduccion Hongos 1kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salame x 1.5kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salsa criolla 300 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-11",
+      "d": 3,
+      "s": 24,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Vacio x 600 gr",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Pesto x unidad",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Picante x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masa Panino x 6 unidades",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 18.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pack de Cajas de Pizza x 50",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pasta Ajo x500g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Peperoni x 1 KG",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pesto verde x 300g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Provoleta Ahumada x 700 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa - 3kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa criolla 300 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-14",
+      "d": 6,
+      "s": 24,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Vacio x 600 gr",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Almendrata x 6 U.",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Berenjena x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 16.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Pesto x unidad",
+      "q": 11.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Picante x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Gorgonzola x 1/2 kg aprox.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masa Panino x 6 unidades",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 40.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Muzza Vegana x 1.5 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Pack de Cajas de Pizza x 50",
+      "q": 15.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Pasta de Ajo x 1 kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Peperoni x 1 KG",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Pesto verde x 300g",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Provoleta Ahumada x 700 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salsa criolla 300 grs",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Vacio x 600 gr",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Almendrata x 6 U.",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Gorgonzola x 1/2 kg aprox.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masa Panino x 6 unidades",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 20.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Pack de Cajas de Pizza x 50",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Papel p/ la pizza x pack",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Pasta Ajo x500g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Peperoni x 1 KG",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Provolone x 4 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salsa - cont.x 7kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salsa criolla 300 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-15",
+      "d": 0,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Berenjena x unidad",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Pesto x unidad",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Picante x unidad",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Gorgonzola x 1/2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masa Panino x 6 unidades",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 30.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Muzza Vegana x 1.5 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Panceta x 3 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pasta Ajo x500g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pesto verde x 300g",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salame x 1.5kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa - 3kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Pesto x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Picante x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masa Panino x 6 unidades",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 15.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Peperoni x 1 KG",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Pesto verde x 300g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Provoleta Ahumada x 700 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salame x 1.5kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salsa - cont.x 7kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salsa criolla 300 grs",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Stella lata 473ml",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-17",
+      "d": 2,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Vacio x 600 gr",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Almendrata x 6 U.",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Chedar 1kg (84 fetas)",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Berenjena x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Pesto x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Picante x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Gorgonzola x 1/2 kg aprox.",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masa Panino x 6 unidades",
+      "q": 12.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 75.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Miel picante x 1kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Muzza Vegana x 1.5 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Pasta de Ajo x 1 kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Pesto verde x 300g",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Provolone x 4 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Reduccion Hongos 1kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salame x 1.5kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salsa criolla 300 grs",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Vacio x 600 gr",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-18",
+      "d": 3,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Peperoni x 1 KG",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Chedar 1kg (84 fetas)",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Berenjena x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Pesto x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Picante x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masa Panino x 6 unidades",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pack de Cajas de Pizza x 50",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pasta Ajo x500g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Peperoni x 1 KG",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pesto verde x 300g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Reduccion Hongos 500 g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa criolla 300 grs",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Vacio x 600 gr",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Almendrata x 6 U.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Berenjena x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Pesto x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Dip Picante x unidad",
+      "q": 10.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Gorgonzola x 1/2 kg aprox.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 30.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 7.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 4.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Nueva Córdoba",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Almendrata x 6 U.",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Dip Berenjena x unidad",
+      "q": 8.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masa Panino x 6 unidades",
+      "q": 3.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 15.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Pack de Cajas de Pizza x 50",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Papel p/ la pizza x pack",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Pesto verde x 300g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salame x 1.5kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salsa - 3kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-21",
+      "d": 6,
+      "s": 25,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Almendrata x 6 U.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Berenjena x unidad",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Hummus de garbanzo x unidad",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Pesto x unidad",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Dip Picante x unidad",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Gorgonzola x 1/2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masa Panino x 6 unidades",
+      "q": 6.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 30.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Panceta x 3 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pasta Ajo x500g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Pesto verde x 300g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Salsa - cont.x 7kg",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-23",
+      "d": 1,
+      "s": 26,
+      "a": 2026,
+      "c": "Alta Córdoba",
+      "p": "Sardo x 2 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Almendrata x 6 U.",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Jamon Cocido x 2 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas - contenedor x 6 unidades",
+      "q": 15.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Masas La Grosa - contenedor x 3 unidades",
+      "q": 2.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Miel picante x 1kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Muzza x 4 kg aprox.",
+      "q": 5.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Panceta x 3 kg",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Pasta Ajo x500g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Provolone x 4 kg aprox.",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Reduccion Hongos 500 g",
+      "q": 1.0
+    },
+    {
+      "f": "2026-06-24",
+      "d": 2,
+      "s": 26,
+      "a": 2026,
+      "c": "Poeta",
+      "p": "Salsa - cont.x 7kg",
+      "q": 1.0
     }
   ],
   "grupos": {
@@ -4443,6 +6504,7 @@ const FABRICA_DATA = {
     "Pesto verde x 500gr",
     "Pomelo paso de los toros lata",
     "Provo cubos 500gr",
+    "Provoleta Ahumada x 700 grs",
     "Provolone x 4 kg aprox.",
     "Provolone x 500gr",
     "Reduccion Hongos 1kg",
@@ -4452,6 +6514,7 @@ const FABRICA_DATA = {
     "Salsa - 3kg",
     "Salsa - cont.x 7kg",
     "Salsa Di Zucca x1kg",
+    "Salsa criolla 300 grs",
     "Salsa x Kg",
     "Sardo x 2 kg aprox.",
     "Sardo x 500gr",
@@ -4460,6 +6523,7 @@ const FABRICA_DATA = {
     "Stella lata 473ml",
     "Tiramisu x unidad",
     "Tomate Hidratado 500g",
+    "Vacio x 600 gr",
     "Verdeo x 1 kg (movil)"
   ],
   "clientes": [
@@ -4493,6 +6557,15 @@ const FABRICA_DATA = {
     "2026-06-04",
     "2026-06-05",
     "2026-06-07",
-    "2026-06-09"
+    "2026-06-09",
+    "2026-06-10",
+    "2026-06-11",
+    "2026-06-14",
+    "2026-06-15",
+    "2026-06-17",
+    "2026-06-18",
+    "2026-06-21",
+    "2026-06-23",
+    "2026-06-24"
   ]
 };
