@@ -943,8 +943,8 @@
 // DATOS EMBEBIDOS
 // ══════════════════════════════════════════════════
 </script>
-<script src="fabrica_data.js?v=20260625"></script>
-<script src="compras_data.js?v=20260625"></script>
+<script src="fabrica_data.js?v=20260630"></script>
+<script src="compras_data.js?v=20260630"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -2412,6 +2412,11 @@ function renderBalance(regsCompras) {
 
   const thead = document.querySelector('#tbl-balance thead');
   const tbody = document.querySelector('#tbl-balance tbody');
+  // Stock del período si existe
+  const stockData = (typeof COMPRAS_DATA !== 'undefined' && COMPRAS_DATA.stock) ? COMPRAS_DATA.stock : null;
+  const stockMap = {};
+  if (stockData) stockData.items.forEach(s => { stockMap[s.insumo] = s; });
+
   thead.innerHTML = `<tr>
     <th>Insumo</th>
     <th class="num">Comprado</th>
@@ -2420,6 +2425,7 @@ function renderBalance(regsCompras) {
     <th class="num">Consumo directo (kg)</th>
     <th class="num">Consumo en recetas (kg)</th>
     <th class="num">Consumo teórico (kg)</th>
+    ${stockData ? '<th class="num">Stock final (kg)</th><th class="num">Diferencia (kg)</th>' : ''}
     <th class="num">Ratio</th>
     <th>Estado</th>
   </tr>`;
