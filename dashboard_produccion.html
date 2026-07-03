@@ -943,8 +943,8 @@
 // DATOS EMBEBIDOS
 // ══════════════════════════════════════════════════
 </script>
-<script src="fabrica_data.js?v=20260630"></script>
-<script src="compras_data.js?v=20260630"></script>
+<script src="fabrica_data.js?v=20260701"></script>
+<script src="compras_data.js?v=20260701"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -2433,6 +2433,12 @@ function renderBalance(regsCompras) {
   tbody.innerHTML = resultados.map(r => {
     const sem = semaforo(r.ratio);
     const ratioStr = r.ratio !== null ? r.ratio.toFixed(2) : '—';
+    const stockItem = stockMap[r.insumo] || null;
+    const stockKg = stockItem ? stockItem.total_kg : null;
+    const stockCantidad = stockItem ? stockItem.cantidad : null;
+    const stockUnidad = stockItem ? stockItem.unidad : null;
+    const diferencia = stockKg !== null ? r.comprado - r.consumoTotal - stockKg : null;
+    const difColor = diferencia === null ? '' : Math.abs(diferencia) < r.comprado * 0.15 ? '#2e7d32' : diferencia > 0 ? '#e65100' : '#1565c0';
     return `<tr style="background:${sem.bg}">
       <td><strong>${r.insumo}</strong></td>
       <td class="num">${fmtQ(r.compradoUnidades)}</td>
@@ -2441,6 +2447,8 @@ function renderBalance(regsCompras) {
       <td class="num">${r.consumoDirecto > 0 ? fmtQ(r.consumoDirecto) : '-'}</td>
       <td class="num">${r.consumoReceta > 0 ? fmtQ(r.consumoReceta) : '-'}</td>
       <td class="num"><strong>${fmtQ(r.consumoTotal)}</strong></td>
+      ${stockData ? `<td class="num">${stockKg !== null ? `<strong>${fmtQ(stockKg)}</strong> kg<br><span style="font-size:10px;color:var(--gris-sub)">${fmtQ(stockCantidad)} ${stockUnidad}</span>` : '-'}</td>
+      <td class="num" style="font-weight:700;color:${difColor}">${diferencia !== null ? (diferencia >= 0 ? '+' : '') + fmtQ(Math.round(diferencia * 100) / 100) : '-'}</td>` : ''}
       <td class="num"><strong style="color:${sem.color}">${ratioStr}</strong></td>
       <td><span style="font-size:11px;font-weight:600;color:${sem.color}">${sem.label}</span></td>
     </tr>`;
