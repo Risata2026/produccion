@@ -847,12 +847,17 @@
 
     <div class="filtros-bar">
       <div>
-        <div class="range-chips" id="chips-compras">
-          <button class="chip active" onclick="setRangoCompras('todo',this)">Todo el período</button>
-          <button class="chip" onclick="setRangoCompras('mes',this)">Mes actual</button>
-          <button class="chip" onclick="setRangoCompras('7d',this)">Últimos 7 días</button>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
+          <button class="chip active" id="chip-todo-compras" onclick="setRangoCompras('todo',this)">Todo</button>
+          <span id="chips-meses-compras" style="display:inline-flex;gap:4px;flex-wrap:wrap"></span>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:8px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <button onclick="navSemanaCompras(-1)" style="background:var(--verde-oscuro);color:#fff;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:13px">&#8592;</button>
+          <span id="semana-label-compras" style="font-size:13px;font-weight:600;color:var(--verde-oscuro);min-width:240px;text-align:center">— semana —</span>
+          <button onclick="navSemanaCompras(1)" style="background:var(--verde-oscuro);color:#fff;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:13px">&#8594;</button>
+          <button class="chip" id="chip-semana-compras" onclick="aplicarSemanaCompras(this)" style="margin-left:4px">Aplicar semana</button>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:4px">
           <div class="filtro-grupo">
             <label>Desde</label>
             <input type="date" id="co-desde">
@@ -943,8 +948,8 @@
 // DATOS EMBEBIDOS
 // ══════════════════════════════════════════════════
 </script>
-<script src="fabrica_data.js?v=20260701"></script>
-<script src="compras_data.js?v=20260701"></script>
+<script src="fabrica_data.js?v=20260702"></script>
+<script src="compras_data.js?v=20260702"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -1900,6 +1905,7 @@ function calcDips() {
 // TAB COMPRAS
 // ══════════════════════════════════════════════════
 function initCompras() {
+  initChipsMeses();
   const selCat = document.getElementById('co-categoria');
   const selIns = document.getElementById('co-insumo');
   const selProv = document.getElementById('co-proveedor');
@@ -1917,20 +1923,65 @@ function initCompras() {
   document.getElementById('co-hasta').value = meses[meses.length-1] + '-31';
 }
 
+let semanaComprasActual = null;
+
+function initChipsMeses() {
+  const meses = [...new Set(COMPRAS_DATA.registros.map(r => r.m))].sort().reverse();
+  const container = document.getElementById('chips-meses-compras');
+  if (!container) return;
+  container.innerHTML = meses.map(m => {
+    const d = new Date(m + '-15');
+    const label = d.toLocaleDateString('es-AR', {month:'short'}) + ' ' + String(d.getFullYear()).slice(2);
+    return `<button class="chip" onclick="setMesCompras('${m}',this)">${label}</button>`;
+  }).join('');
+  // Semana actual (dom → sáb)
+  const hoy = today();
+  const dow = new Date(hoy + 'T00:00:00').getDay();
+  const domingo = addDays(hoy, -dow);
+  semanaComprasActual = { desde: domingo, hasta: addDays(domingo, 6) };
+  actualizarLabelSemana();
+}
+
+function actualizarLabelSemana() {
+  const el = document.getElementById('semana-label-compras');
+  if (el && semanaComprasActual) {
+    el.textContent = semanaComprasActual.desde + ' → ' + semanaComprasActual.hasta;
+  }
+}
+
+function navSemanaCompras(dir) {
+  if (!semanaComprasActual) return;
+  semanaComprasActual = {
+    desde: addDays(semanaComprasActual.desde, dir * 7),
+    hasta: addDays(semanaComprasActual.hasta, dir * 7)
+  };
+  actualizarLabelSemana();
+}
+
+function aplicarSemanaCompras(el) {
+  document.querySelectorAll('#chips-meses-compras .chip, #chip-todo-compras').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('co-desde').value = semanaComprasActual.desde;
+  document.getElementById('co-hasta').value = semanaComprasActual.hasta;
+  renderCompras();
+}
+
+function setMesCompras(mes, el) {
+  document.querySelectorAll('#chips-meses-compras .chip, #chip-todo-compras, #chip-semana-compras').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  const lastDay = new Date(parseInt(mes.slice(0,4)), parseInt(mes.slice(5,7)), 0).getDate();
+  document.getElementById('co-desde').value = mes + '-01';
+  document.getElementById('co-hasta').value = mes + '-' + String(lastDay).padStart(2,'0');
+  renderCompras();
+}
+
 function setRangoCompras(tipo, el) {
-  document.querySelectorAll('#chips-compras .chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('#chips-meses-compras .chip, #chip-todo-compras, #chip-semana-compras').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
   const meses = COMPRAS_DATA.meses;
   if (tipo === 'todo') {
     document.getElementById('co-desde').value = meses[0] + '-01';
     document.getElementById('co-hasta').value = meses[meses.length-1] + '-31';
-  } else if (tipo === 'mes') {
-    const hoy = today();
-    document.getElementById('co-desde').value = hoy.slice(0,8) + '01';
-    document.getElementById('co-hasta').value = hoy;
-  } else if (tipo === '7d') {
-    document.getElementById('co-desde').value = addDays(today(), -6);
-    document.getElementById('co-hasta').value = today();
   }
   renderCompras();
 }
@@ -2242,10 +2293,10 @@ const UNIDAD_COMPRA = {
 const CONSUMO_MAP = {
   // ── DESPACHOS DIRECTOS ──
   'Muzzarella': [
-    { producto: 'Muzza x 4 kg aprox.', tipo: 'directo', kg_por_unid: 2.8 },
+    { producto: 'Muzza x 4 kg aprox.', tipo: 'directo', kg_por_unid: 'muzza_factor' },
   ],
   'Cuartirolo': [
-    { producto: 'Muzza x 4 kg aprox.', tipo: 'directo', kg_por_unid: 1.2 },
+    { producto: 'Muzza x 4 kg aprox.', tipo: 'directo', kg_por_unid: 'cuarti_factor' },
   ],
   'Muzza Vegana': [
     { producto: 'Muzza Vegana x 1.5 kg', tipo: 'directo', kg_por_unid: 1.5 },
@@ -2362,6 +2413,11 @@ function renderBalance(regsCompras) {
   // Para cada insumo en CONSUMO_MAP: calcular consumo teórico
   const resultados = [];
   Object.entries(CONSUMO_MAP).forEach(([insumo, usos]) => {
+    // Factor muzza/cuartirolo según período
+    const desde_bal = document.getElementById('co-desde').value || '';
+    const MUZZA_FACTOR = desde_bal >= '2026-07-01' ? 2.4 : 2.8;
+    const CUARTI_FACTOR = desde_bal >= '2026-07-01' ? 1.6 : 1.2;
+
     // Comprado en el período — en kg y en unidades de compra
     const factor = FACTOR_COMPRA_KG[insumo] || 1.0;
     const factorUnidad = FACTOR_KG_A_UNIDAD[insumo] || null;
@@ -2381,7 +2437,10 @@ function renderBalance(regsCompras) {
     usos.forEach(uso => {
       const unidades = despachosProd[uso.producto] || 0;
       if (unidades === 0) return;
-      const consumo = unidades * uso.kg_por_unid;
+      let kgUnid = uso.kg_por_unid;
+      if (kgUnid === 'muzza_factor') kgUnid = MUZZA_FACTOR;
+      if (kgUnid === 'cuarti_factor') kgUnid = CUARTI_FACTOR;
+      const consumo = unidades * kgUnid;
       if (uso.tipo === 'directo') {
         consumoDirecto += consumo;
         desglose.push({ prod: uso.producto, tipo: 'directo', unidades, consumo });
