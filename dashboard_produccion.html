@@ -537,11 +537,15 @@
 
     <div class="filtros-bar">
       <div>
-        <div class="range-chips" id="chips-resumen">
-          <button class="chip" onclick="setRango('semana',this)">Esta semana</button>
-          <button class="chip" onclick="setRango('7d',this)">Últimos 7 días</button>
-          <button class="chip" onclick="setRango('mes',this)">Mes actual</button>
-          <button class="chip active" onclick="setRango('todo',this)">Todo el período</button>
+        <div class="range-chips" id="chips-resumen" style="display:flex;gap:4px;flex-wrap:wrap;align-items:center">
+          <button class="chip active" id="chip-todo-resumen" onclick="setRango('todo',this)">Todo</button>
+          <span id="chips-meses-resumen" style="display:inline-flex;gap:4px;flex-wrap:wrap"></span>
+          <span style="display:inline-flex;align-items:center;gap:6px;margin-left:4px">
+            <button onclick="navSemana_resumen(-1)" style="background:var(--verde-oscuro);color:#fff;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px">&#8592;</button>
+            <span id="semana-label-resumen" style="font-size:12px;font-weight:600;color:var(--verde-oscuro);min-width:210px;text-align:center">— semana —</span>
+            <button onclick="navSemana_resumen(1)" style="background:var(--verde-oscuro);color:#fff;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px">&#8594;</button>
+            <button class="chip" id="chip-sem-resumen" onclick="aplicarSemana_resumen(this)">↵ semana</button>
+          </span>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
           <div class="filtro-grupo">
@@ -576,11 +580,15 @@
 
     <div class="filtros-bar">
       <div>
-        <div class="range-chips" id="chips-productos">
-          <button class="chip" onclick="setRangoP('semana',this)">Esta semana</button>
-          <button class="chip" onclick="setRangoP('7d',this)">Últimos 7 días</button>
-          <button class="chip" onclick="setRangoP('mes',this)">Mes actual</button>
-          <button class="chip active" onclick="setRangoP('todo',this)">Todo el período</button>
+        <div class="range-chips" id="chips-productos" style="display:flex;gap:4px;flex-wrap:wrap;align-items:center">
+          <button class="chip active" id="chip-todo-productos" onclick="setRangoP('todo',this)">Todo</button>
+          <span id="chips-meses-productos" style="display:inline-flex;gap:4px;flex-wrap:wrap"></span>
+          <span style="display:inline-flex;align-items:center;gap:6px;margin-left:4px">
+            <button onclick="navSemana_productos(-1)" style="background:var(--verde-oscuro);color:#fff;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px">&#8592;</button>
+            <span id="semana-label-productos" style="font-size:12px;font-weight:600;color:var(--verde-oscuro);min-width:210px;text-align:center">— semana —</span>
+            <button onclick="navSemana_productos(1)" style="background:var(--verde-oscuro);color:#fff;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px">&#8594;</button>
+            <button class="chip" id="chip-sem-productos" onclick="aplicarSemana_productos(this)">↵ semana</button>
+          </span>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
           <div class="filtro-grupo">
@@ -614,11 +622,15 @@
 
     <div class="filtros-bar">
       <div>
-        <div class="range-chips" id="chips-clientes">
-          <button class="chip" onclick="setRangoC('semana',this)">Esta semana</button>
-          <button class="chip" onclick="setRangoC('7d',this)">Últimos 7 días</button>
-          <button class="chip" onclick="setRangoC('mes',this)">Mes actual</button>
-          <button class="chip active" onclick="setRangoC('todo',this)">Todo el período</button>
+        <div class="range-chips" id="chips-clientes" style="display:flex;gap:4px;flex-wrap:wrap;align-items:center">
+          <button class="chip active" id="chip-todo-clientes" onclick="setRangoC('todo',this)">Todo</button>
+          <span id="chips-meses-clientes" style="display:inline-flex;gap:4px;flex-wrap:wrap"></span>
+          <span style="display:inline-flex;align-items:center;gap:6px;margin-left:4px">
+            <button onclick="navSemana_clientes(-1)" style="background:var(--verde-oscuro);color:#fff;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px">&#8592;</button>
+            <span id="semana-label-clientes" style="font-size:12px;font-weight:600;color:var(--verde-oscuro);min-width:210px;text-align:center">— semana —</span>
+            <button onclick="navSemana_clientes(1)" style="background:var(--verde-oscuro);color:#fff;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px">&#8594;</button>
+            <button class="chip" id="chip-sem-clientes" onclick="aplicarSemana_clientes(this)">↵ semana</button>
+          </span>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
           <div class="filtro-grupo">
@@ -948,8 +960,8 @@
 // DATOS EMBEBIDOS
 // ══════════════════════════════════════════════════
 </script>
-<script src="fabrica_data.js?v=20260702"></script>
-<script src="compras_data.js?v=20260702"></script>
+<script src="fabrica_data.js?v=20260703"></script>
+<script src="compras_data.js?v=20260703"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -1102,6 +1114,9 @@ function init() {
   renderProductos();
   renderClientes();
   renderSemana();
+  initChipsMesesTab('resumen');
+  initChipsMesesTab('productos');
+  initChipsMesesTab('clientes');
   if (typeof COMPRAS_DATA !== "undefined") initCompras();
 }
 
@@ -1124,17 +1139,17 @@ function activarChip(container, el) {
 }
 
 function setRango(tipo, el) {
-  activarChip(document.getElementById('chips-resumen'), el);
+  document.querySelectorAll('#chips-resumen .chip').forEach(c => c.classList.remove('active')); el.classList.add('active');
   aplicarRango(tipo, 'r-desde', 'r-hasta');
   renderResumen();
 }
 function setRangoP(tipo, el) {
-  activarChip(document.getElementById('chips-productos'), el);
+  document.querySelectorAll('#chips-productos .chip').forEach(c => c.classList.remove('active')); el.classList.add('active');
   aplicarRango(tipo, 'p-desde', 'p-hasta');
   renderProductos();
 }
 function setRangoC(tipo, el) {
-  activarChip(document.getElementById('chips-clientes'), el);
+  document.querySelectorAll('#chips-clientes .chip').forEach(c => c.classList.remove('active')); el.classList.add('active');
   aplicarRango(tipo, 'c-desde', 'c-hasta');
   renderClientes();
 }
@@ -2512,6 +2527,65 @@ function renderBalance(regsCompras) {
       <td><span style="font-size:11px;font-weight:600;color:${sem.color}">${sem.label}</span></td>
     </tr>`;
   }).join('');
+}
+
+
+// ══════════════════════════════════════════════════
+// NAVEGACIÓN POR MESES Y SEMANAS — RESUMEN/PRODUCTOS/CLIENTES
+// ══════════════════════════════════════════════════
+let semanas_tabs = { resumen: null, productos: null, clientes: null };
+
+function initSemana(tab) {
+  const hoy = today();
+  const dow = new Date(hoy + 'T00:00:00').getDay();
+  const domingo = addDays(hoy, -dow);
+  semanas_tabs[tab] = { desde: domingo, hasta: addDays(domingo, 6) };
+  document.getElementById('semana-label-' + tab).textContent = semanas_tabs[tab].desde + ' → ' + semanas_tabs[tab].hasta;
+}
+
+function initChipsMesesTab(tab) {
+  const meses = [...new Set(DATA.fechas.map(f => f.slice(0,7)))].sort().reverse();
+  const container = document.getElementById('chips-meses-' + tab);
+  if (!container) return;
+  container.innerHTML = meses.map(m => {
+    const d = new Date(m + '-15');
+    const label = d.toLocaleDateString('es-AR', {month:'short'}) + ' ' + String(d.getFullYear()).slice(2);
+    return `<button class="chip" onclick="setMesTab('${m}','${tab}',this)">${label}</button>`;
+  }).join('');
+  initSemana(tab);
+}
+
+function setMesTab(mes, tab, el) {
+  document.querySelectorAll('#chips-' + tab + ' .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  const lastDay = new Date(parseInt(mes.slice(0,4)), parseInt(mes.slice(5,7)), 0).getDate();
+  const desde = mes + '-01';
+  const hasta = mes + '-' + String(lastDay).padStart(2,'0');
+  if (tab === 'resumen') { document.getElementById('r-desde').value = desde; document.getElementById('r-hasta').value = hasta; renderResumen(); }
+  else if (tab === 'productos') { document.getElementById('p-desde').value = desde; document.getElementById('p-hasta').value = hasta; renderProductos(); }
+  else if (tab === 'clientes') { document.getElementById('c-desde').value = desde; document.getElementById('c-hasta').value = hasta; renderClientes(); }
+}
+
+function navSemana_resumen(dir) { _navSem('resumen', dir); }
+function navSemana_productos(dir) { _navSem('productos', dir); }
+function navSemana_clientes(dir) { _navSem('clientes', dir); }
+
+function _navSem(tab, dir) {
+  semanas_tabs[tab] = { desde: addDays(semanas_tabs[tab].desde, dir*7), hasta: addDays(semanas_tabs[tab].hasta, dir*7) };
+  document.getElementById('semana-label-' + tab).textContent = semanas_tabs[tab].desde + ' → ' + semanas_tabs[tab].hasta;
+}
+
+function aplicarSemana_resumen(el) { _aplicarSem('resumen', el); renderResumen(); }
+function aplicarSemana_productos(el) { _aplicarSem('productos', el); renderProductos(); }
+function aplicarSemana_clientes(el) { _aplicarSem('clientes', el); renderClientes(); }
+
+function _aplicarSem(tab, el) {
+  document.querySelectorAll('#chips-' + tab + ' .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  const s = semanas_tabs[tab];
+  if (tab === 'resumen') { document.getElementById('r-desde').value = s.desde; document.getElementById('r-hasta').value = s.hasta; }
+  else if (tab === 'productos') { document.getElementById('p-desde').value = s.desde; document.getElementById('p-hasta').value = s.hasta; }
+  else if (tab === 'clientes') { document.getElementById('c-desde').value = s.desde; document.getElementById('c-hasta').value = s.hasta; }
 }
 
 // Listeners reactivos para semana
