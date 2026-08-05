@@ -960,8 +960,8 @@
 // DATOS EMBEBIDOS
 // ══════════════════════════════════════════════════
 </script>
-<script src="fabrica_data.js?v=20260703"></script>
-<script src="compras_data.js?v=20260703"></script>
+<script src="fabrica_data.js?v=20260805"></script>
+<script src="compras_data.js?v=20260805"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -2171,7 +2171,8 @@ function renderComprasEvolucion(regs) {
     let lastPrecioUnit = null;
     for (const r of sorted) {
       if (r.q === 0 || r['$'] === 0) continue;
-      const precioUnit = r['$'] / r.q;
+      // Usar pu (precio unitario real) si existe, sino calcular desde total
+      const precioUnit = (r.pu !== undefined) ? r.pu : r['$'] / r.q;
       const precioRound = Math.round(precioUnit);
       if (lastPrecioUnit === null) {
         precios.push({ fecha: r.f, precio: precioRound, u: r.u });
