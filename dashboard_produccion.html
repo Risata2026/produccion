@@ -761,6 +761,7 @@
       <div class="calc-grid">
         <div class="card">
           <div class="card-title">¿Cuántos envases de salsa necesitás?</div>
+          <div style="font-size:11px;font-weight:700;color:var(--gris-sub);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Salsa Italiana (50% Gustarosso + 50% Corper)</div>
           <div class="masa-input-row">
             <div class="masa-label"><strong>Envase 3 kg</strong><span>contenedor chico</span></div>
             <div class="masa-qty-wrap">
@@ -775,6 +776,23 @@
               <button onclick="ajustarSalsa('s7',-1)">−</button>
               <input type="number" class="qty-input" id="qty-s7" value="0" min="0" oninput="calcSalsa()">
               <button onclick="ajustarSalsa('s7',1)">+</button>
+            </div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--gris-sub);text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 8px">Salsa Clásica (100% Corper nacional)</div>
+          <div class="masa-input-row">
+            <div class="masa-label"><strong>Envase 3 kg</strong><span>contenedor chico</span></div>
+            <div class="masa-qty-wrap">
+              <button onclick="ajustarSalsa('sc3',-1)">−</button>
+              <input type="number" class="qty-input" id="qty-sc3" value="0" min="0" oninput="calcSalsa()">
+              <button onclick="ajustarSalsa('sc3',1)">+</button>
+            </div>
+          </div>
+          <div class="masa-input-row">
+            <div class="masa-label"><strong>Envase 7 kg</strong><span>contenedor grande</span></div>
+            <div class="masa-qty-wrap">
+              <button onclick="ajustarSalsa('sc7',-1)">−</button>
+              <input type="number" class="qty-input" id="qty-sc7" value="0" min="0" oninput="calcSalsa()">
+              <button onclick="ajustarSalsa('sc7',1)">+</button>
             </div>
           </div>
           <div style="margin-top:16px;display:flex;gap:8px">
@@ -960,8 +978,8 @@
 // DATOS EMBEBIDOS
 // ══════════════════════════════════════════════════
 </script>
-<script src="fabrica_data.js?v=20260805"></script>
-<script src="compras_data.js?v=20260805"></script>
+<script src="fabrica_data.js?v=20260904"></script>
+<script src="compras_data.js?v=20260904"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -1736,47 +1754,67 @@ function ajustarSalsa(tipo, delta) {
 }
 
 function resetSalsa() {
-  ['s3','s7'].forEach(t => document.getElementById('qty-' + t).value = 0);
+  ['s3','s7','sc3','sc7'].forEach(t => document.getElementById('qty-' + t).value = 0);
   document.getElementById('resultado-salsa').innerHTML = '<div class="res-vacio">Ingresá las cantidades para ver el cálculo</div>';
 }
 
 function calcSalsa() {
   const q3 = parseInt(document.getElementById('qty-s3').value) || 0;
   const q7 = parseInt(document.getElementById('qty-s7').value) || 0;
-  const totalKg = q3 * 3 + q7 * 7;
-  if (totalKg === 0) {
+  const sc3 = parseInt(document.getElementById('qty-sc3').value) || 0;
+  const sc7 = parseInt(document.getElementById('qty-sc7').value) || 0;
+  const totalKgItal = q3 * 3 + q7 * 7;
+  const totalKgClas = sc3 * 3 + sc7 * 7;
+  if (totalKgItal === 0 && totalKgClas === 0) {
     document.getElementById('resultado-salsa').innerHTML = '<div class="res-vacio">Ingresá las cantidades para ver el cálculo</div>';
     return;
   }
-  const prepsExactas = totalKg / KG_SALSA_PREP;
-  const prepsEnteras = Math.ceil(prepsExactas);
-  const kgTotal = prepsEnteras * KG_SALSA_PREP;
-  // Insumos
-  const gus_kg = prepsEnteras * 11.25;
-  const cor_kg = prepsEnteras * 11.25;
+  // Salsa Italiana: prep de 23kg
+  const prepsItalExactas = totalKgItal / KG_SALSA_PREP;
+  const prepsItalEnteras = Math.ceil(prepsItalExactas);
+  const gus_kg = prepsItalEnteras * 11.25;
+  const cor_ital_kg = prepsItalEnteras * 11.25;
   const gus_latas = Math.ceil(gus_kg / 2.5);
-  const cor_latas = Math.ceil(cor_kg / 3.0);
-  const aceite_g = prepsEnteras * 250;
-  const sal_g = prepsEnteras * 250;
-  const sobrante = prepsEnteras * KG_SALSA_PREP - totalKg;
+  const cor_ital_latas = Math.ceil(cor_ital_kg / 3.0);
+  const aceite_g = prepsItalEnteras * 250;
+  const sal_ital_g = prepsItalEnteras * 250;
+  // Salsa Clásica: 4 latas Corper (11.72kg) → 12kg
+  const prepsClaExactas = totalKgClas / 12;
+  const prepsClasEnteras = Math.ceil(prepsClaExactas);
+  const cor_clas_latas = prepsClasEnteras * 4;
+  const cor_clas_kg = cor_clas_latas * 2.93;
+  const sal_clas_g = prepsClasEnteras * 115;
+  const aceite_clas_g = prepsClasEnteras * 115;
+  const sobrItal = prepsItalEnteras * KG_SALSA_PREP - totalKgItal;
+  const sobrClas = prepsClasEnteras * 12 - totalKgClas;
+
+  let html = '';
+  if (totalKgItaliano > 0 || true) {
+    // siempre mostrar ambas secciones si hay algo
+  }
 
   document.getElementById('resultado-salsa').innerHTML = `
-    <div>
-      <div class="res-titulo">Preparaciones necesarias</div>
-      <div class="res-numero">${prepsEnteras}</div>
-      <div class="res-sub">${Math.abs(prepsExactas - prepsEnteras) < 0.01 ? 'exacto' : `(${prepsExactas.toFixed(2)} exactas → redondeado arriba)`}</div>
+    ${totalKgItal > 0 ? `<div>
+      <div class="res-titulo">Salsa Italiana — preparaciones</div>
+      <div class="res-numero">${prepsItalEnteras}</div>
     </div>
-    <div class="res-detalle" style="margin-top:12px;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px">
+    <div class="res-detalle" style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.15);padding-top:10px">
       <div class="res-detalle-row"><span>Tomate Gustarosso</span><strong>${gus_kg.toFixed(1)} kg · ${gus_latas} latas (2.5kg)</strong></div>
-      <div class="res-detalle-row"><span>Tomate Corper/Knor</span><strong>${cor_kg.toFixed(1)} kg · ${cor_latas} latas (~3kg)</strong></div>
+      <div class="res-detalle-row"><span>Tomate Corper</span><strong>${cor_ital_kg.toFixed(1)} kg · ${cor_ital_latas} latas (~3kg)</strong></div>
       <div class="res-detalle-row"><span>Aceite de oliva</span><strong>${aceite_g} g</strong></div>
-      <div class="res-detalle-row"><span>Sal</span><strong>${sal_g} g</strong></div>
+      <div class="res-detalle-row"><span>Sal</span><strong>${sal_ital_g} g</strong></div>
+      ${sobrItal > 0 ? `<div class="res-merma">Sobrante: ${sobrItal.toFixed(1)} kg ✓</div>` : ''}
+    </div>` : ''}
+    ${totalKgClas > 0 ? `<div style="margin-top:${totalKgItal>0?'12px':'0'}">
+      <div class="res-titulo">Salsa Clásica — preparaciones</div>
+      <div class="res-numero">${prepsClasEnteras}</div>
     </div>
-    <div class="res-detalle" style="margin-top:8px;border-top:1px solid rgba(255,255,255,0.15);padding-top:8px">
-      <div class="res-detalle-row"><span>Salsa total producida</span><strong>${kgTotal} kg</strong></div>
-      <div class="res-detalle-row"><span>Salsa pedida</span><strong>${totalKg} kg (${q3>0?q3+' env. × 3kg':''}${q3>0&&q7>0?' + ':''}${q7>0?q7+' env. × 7kg':''})</strong></div>
-      ${sobrante > 0 ? `<div class="res-merma">Sobrante estimado: ${sobrante.toFixed(1)} kg ✓</div>` : ''}
-    </div>
+    <div class="res-detalle" style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.15);padding-top:10px">
+      <div class="res-detalle-row"><span>Tomate Corper nacional</span><strong>${cor_clas_kg.toFixed(1)} kg · ${cor_clas_latas} latas (2.93kg)</strong></div>
+      <div class="res-detalle-row"><span>Aceite girasol</span><strong>${aceite_clas_g} g</strong></div>
+      <div class="res-detalle-row"><span>Sal</span><strong>${sal_clas_g} g</strong></div>
+      ${sobrClas > 0 ? `<div class="res-merma">Sobrante: ${sobrClas.toFixed(1)} kg ✓</div>` : ''}
+    </div>` : ''}
   `;
 }
 
@@ -2365,9 +2403,13 @@ const CONSUMO_MAP = {
     { producto: 'Salsa x Kg',         tipo: 'receta', kg_por_unid: (1/23) * 11.5 },
   ],
   'Tomate Corper': [
+    // Salsa Italiana: 50% Corper + 50% Gustarosso, prep de 23kg
     { producto: 'Salsa - 3kg',        tipo: 'receta', kg_por_unid: (3/23) * 11.5 },
     { producto: 'Salsa - cont.x 7kg', tipo: 'receta', kg_por_unid: (7/23) * 11.5 },
     { producto: 'Salsa x Kg',         tipo: 'receta', kg_por_unid: (1/23) * 11.5 },
+    // Salsa Clásica: 100% Corper, 4 latas (11.72kg) → 12kg rinde
+    { producto: 'Salsa Clasica x 3kg', tipo: 'receta', kg_por_unid: (3/12) * 11.72 },
+    { producto: 'Salsa Clasica x 7kg', tipo: 'receta', kg_por_unid: (7/12) * 11.72 },
   ],
   'Harina Almendra': [
     // Almendrata: misma lógica que orgánica pero con harina de almendra
