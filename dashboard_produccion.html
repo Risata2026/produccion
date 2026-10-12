@@ -978,8 +978,8 @@
 // DATOS EMBEBIDOS
 // ══════════════════════════════════════════════════
 </script>
-<script src="fabrica_data.js?v=20260904"></script>
-<script src="compras_data.js?v=20260904"></script>
+<script src="fabrica_data.js?v=20261010"></script>
+<script src="compras_data.js?v=20261010"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -1787,6 +1787,11 @@ function calcSalsa() {
   const aceite_clas_g = prepsClasEnteras * 115;
   const sobrItal = prepsItalEnteras * KG_SALSA_PREP - totalKgItal;
   const sobrClas = prepsClasEnteras * 12 - totalKgClas;
+
+  let html = '';
+  if (totalKgItaliano > 0 || true) {
+    // siempre mostrar ambas secciones si hay algo
+  }
 
   document.getElementById('resultado-salsa').innerHTML = `
     ${totalKgItal > 0 ? `<div>
