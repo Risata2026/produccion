@@ -914,6 +914,9 @@
               <option value="">Todos</option>
             </select>
           </div>
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gris-sub);cursor:pointer;padding-bottom:8px">
+            <input type="checkbox" id="co-incl-desc" onchange="renderCompras()"> Incluir descartables en los totales
+          </label>
           <button class="btn-filtrar" onclick="renderCompras()">Aplicar</button>
           <button class="btn-reset" onclick="resetCompras()">Limpiar</button>
         </div>
@@ -936,6 +939,10 @@
       <div class="card">
         <div class="card-title">Cantidades por insumo en el período</div>
         <div class="tbl-wrap"><table id="tbl-compras-insumos"><thead></thead><tbody></tbody></table></div>
+      </div>
+      <div class="card" id="card-descartables" style="display:none;border-style:dashed">
+        <div class="card-title">Descartables y packaging — aparte, no suman al total de insumos</div>
+        <div class="tbl-wrap"><table id="tbl-compras-desc"><thead></thead><tbody></tbody></table></div>
       </div>
     </div>
 
@@ -966,6 +973,7 @@
       <div class="card">
         <div class="card-title">Comprado vs Consumo teórico — desglose por insumo</div>
         <div class="tbl-wrap"><table id="tbl-balance"><thead></thead><tbody></tbody></table></div>
+        <div id="balance-nota" style="font-size:11px;color:var(--gris-sub);margin-top:8px"></div>
       </div>
     </div>
 
@@ -978,8 +986,8 @@
 // DATOS EMBEBIDOS
 // ══════════════════════════════════════════════════
 </script>
-<script src="fabrica_data.js?v=20261010"></script>
-<script src="compras_data.js?v=20261010"></script>
+<script src="fabrica_data.js?v=20261112"></script>
+<script src="compras_data.js?v=20261112"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -1788,11 +1796,6 @@ function calcSalsa() {
   const sobrItal = prepsItalEnteras * KG_SALSA_PREP - totalKgItal;
   const sobrClas = prepsClasEnteras * 12 - totalKgClas;
 
-  let html = '';
-  if (totalKgItaliano > 0 || true) {
-    // siempre mostrar ambas secciones si hay algo
-  }
-
   document.getElementById('resultado-salsa').innerHTML = `
     ${totalKgItal > 0 ? `<div>
       <div class="res-titulo">Salsa Italiana — preparaciones</div>
@@ -2046,6 +2049,7 @@ function resetCompras() {
   document.getElementById('co-categoria').value = '';
   document.getElementById('co-insumo').value = '';
   document.getElementById('co-proveedor').value = '';
+  document.getElementById('co-incl-desc').checked = false;
   renderCompras();
 }
 
@@ -2075,7 +2079,16 @@ function showVistaCompras(id, el) {
 }
 
 function renderCompras() {
-  const regs = filtrarCompras();
+  const regsTodos = filtrarCompras();
+
+  // Descartables separados: no entran en los totales salvo que se pida
+  const inclDesc = document.getElementById('co-incl-desc').checked;
+  const catSel = document.getElementById('co-categoria').value;
+  const insSel = document.getElementById('co-insumo').value;
+  const regsDesc = regsTodos.filter(r => r.c === 'Descartables');
+  const pideDesc = inclDesc || catSel === 'Descartables' || (insSel && regsDesc.length > 0 && regsDesc.length === regsTodos.length);
+  const regs = pideDesc ? regsTodos : regsTodos.filter(r => r.c !== 'Descartables');
+  const totalDesc = regsDesc.reduce((s,r) => s+r['$'], 0);
 
   // KPIs
   const totalPesos = regs.reduce((s,r) => s+r['$'], 0);
@@ -2104,6 +2117,11 @@ function renderCompras() {
       <div class="kpi-val">${provUnicos}</div>
       <div class="kpi-sub">de ${COMPRAS_DATA.proveedores.length} totales</div>
     </div>
+    <div class="kpi" style="border-style:dashed">
+      <div class="kpi-label">Descartables</div>
+      <div class="kpi-val">$${(totalDesc/1000).toFixed(0)}K</div>
+      <div class="kpi-sub">${pideDesc ? 'incluidos en el total' : 'aparte, fuera del total'}</div>
+    </div>
   `;
 
   // Vista activa
@@ -2111,13 +2129,27 @@ function renderCompras() {
     document.getElementById('compras-vista-' + v).style.display !== 'none'
   ) || 'insumos';
 
-  if (vistaActiva === 'insumos') renderComprasInsumos(regs);
+  if (vistaActiva === 'insumos') renderComprasInsumos(regs, pideDesc ? [] : regsDesc);
   else if (vistaActiva === 'proveedores') renderComprasProveedores(regs);
   else if (vistaActiva === 'evolucion') renderComprasEvolucion(regs);
   else renderBalance(regs);
 }
 
-function renderComprasInsumos(regs) {
+function renderComprasInsumos(regs, regsDesc) {
+  // Descartables en tabla aparte
+  const cardD = document.getElementById('card-descartables');
+  if (regsDesc && regsDesc.length) {
+    const mapD = {};
+    regsDesc.forEach(r => {
+      if (!mapD[r.i]) mapD[r.i] = { cantidad: 0, pesos: 0, unidad: r.u };
+      mapD[r.i].cantidad += r.q; mapD[r.i].pesos += r['$'];
+    });
+    document.querySelector('#tbl-compras-desc thead').innerHTML = '<tr><th>Descartable</th><th class="num">Cantidad</th><th class="num">Total $</th></tr>';
+    document.querySelector('#tbl-compras-desc tbody').innerHTML = Object.entries(mapD).sort((a,b)=>b[1].pesos-a[1].pesos).map(([n,d]) =>
+      `<tr><td><strong>${n}</strong></td><td class="num">${fmtQ(d.cantidad)} ${d.unidad||'u'}</td><td class="num">$${(d.pesos/1000).toFixed(1)}K</td></tr>`).join('');
+    cardD.style.display = 'block';
+  } else { cardD.style.display = 'none'; }
+
   // Agrupar por insumo
   const map = {};
   regs.forEach(r => {
@@ -2288,7 +2320,10 @@ function renderComprasEvolucion(regs) {
 const FACTOR_COMPRA_KG = {
   // Insumos comprados en unidades → factor para convertir a kg
   'Harina Orgánica':    25.0,   // bolsa 25kg
-  'Harina Almendra':     5.0,   // bolsa 5kg
+  'Harina Almendra':    25.0,   // bolsa 25kg
+  'Berenjenas':          1.0,
+  'Tomate Deshidratado': 1.0,
+  'Jamón Crudo':         1.0,
   'Tomate Gustarosso':   2.5,   // lata 2.5kg
   'Tomate Corper':       2.93,  // lata ~2.93kg
   'Hongo de Pino':       1.0,   // bolsa 1kg
@@ -2324,7 +2359,10 @@ const FACTOR_KG_A_UNIDAD = {
 // Etiquetas de unidad de compra para mostrar en balance
 const UNIDAD_COMPRA = {
   'Harina Orgánica':   'bolsas 25kg',
-  'Harina Almendra':   'bolsas 5kg',
+  'Harina Almendra':   'bolsas 25kg',
+  'Berenjenas':        'kg',
+  'Tomate Deshidratado': 'kg',
+  'Jamón Crudo':       'kg',
   'Tomate Gustarosso': 'latas 2.5kg',
   'Tomate Corper':     'latas ~2.93kg',
   'Hongo de Pino':     'bolsas 1kg',
@@ -2344,13 +2382,27 @@ const UNIDAD_COMPRA = {
   'Pepperoni':         'unidades ~880g',
 };
 
+// Insumos cuya receta todavía no está cargada completa: no se evalúa el ratio
+const INCOMPLETOS = { 'Harina Almendra': 'falta receta de la Almendrata' };
+
 const CONSUMO_MAP = {
+  'Jamón Crudo': [
+    { producto: 'Jamon crudo x 600 grs', tipo: 'directo', kg_por_unid: 0.6 },
+  ],
+  'Berenjenas': [
+    { producto: 'Dip Berenjena x unidad', tipo: 'receta', kg_por_unid: 3/25 },   // 3 kg por preparación de 25 potes
+  ],
+  'Tomate Deshidratado': [
+    { producto: 'Dip Picante x unidad', tipo: 'receta', kg_por_unid: 0.6/59 },   // 0,6 kg por preparación de 59 potes
+  ],
   // ── DESPACHOS DIRECTOS ──
   'Muzzarella': [
     { producto: 'Muzza x 4 kg aprox.', tipo: 'directo', kg_por_unid: 'muzza_factor' },
+    { producto: 'Muzza x 500gr', tipo: 'directo', kg_por_unid: 'muzza_factor_500' },
   ],
   'Cuartirolo': [
     { producto: 'Muzza x 4 kg aprox.', tipo: 'directo', kg_por_unid: 'cuarti_factor' },
+    { producto: 'Muzza x 500gr', tipo: 'directo', kg_por_unid: 'cuarti_factor_500' },
   ],
   'Muzza Vegana': [
     { producto: 'Muzza Vegana x 1.5 kg', tipo: 'directo', kg_por_unid: 1.5 },
@@ -2363,24 +2415,30 @@ const CONSUMO_MAP = {
     // merma de corte 33.68% → factor 1/0.6632 = 1.5078
     { producto: 'Panceta x 3 kg',  tipo: 'directo', kg_por_unid: 3.0 * 1.5078 },
     { producto: 'Panceta x 500gr', tipo: 'directo', kg_por_unid: 0.5 * 1.5078 },
+    { producto: 'Panceta x 1.5 kg', tipo: 'directo', kg_por_unid: 1.5 * 1.5078 },
   ],
   'Provoleta': [
     { producto: 'Provolone x 4 kg aprox.', tipo: 'directo', kg_por_unid: 4.0 },
     { producto: 'Provolone x 500gr',       tipo: 'directo', kg_por_unid: 0.5 },
     { producto: 'Provo cubos 500gr',       tipo: 'directo', kg_por_unid: 0.5 },
     { producto: 'Provoleta Ahumada x 700 grs', tipo: 'directo', kg_por_unid: 0.7 },
+    { producto: 'Provo en hebras x 2 kg',      tipo: 'directo', kg_por_unid: 2.0 },
+    { producto: 'Provolone en hebras x 1 kg',  tipo: 'directo', kg_por_unid: 1.0 },
+    { producto: 'Provolone x 2 kg',            tipo: 'directo', kg_por_unid: 2.0 },
   ],
   'Sardo Estacionado': [
     // merma de corte 8.57% → factor 1/0.9143 = 1.0937
     { producto: 'Sardo x 2 kg aprox.', tipo: 'directo', kg_por_unid: 2.0 * 1.0937 },
     { producto: 'Sardo x 500gr',       tipo: 'directo', kg_por_unid: 0.5 * 1.0937 },
     { producto: 'Pesto verde x 300g',  tipo: 'receta',  kg_por_unid: (0.5/45) * 1.0937 },
+    { producto: 'Dip Pesto x unidad',  tipo: 'receta',  kg_por_unid: (0.5/45) * 1.0937 },
     { producto: 'Pesto verde x 500gr', tipo: 'receta',  kg_por_unid: (0.5/45) * 1.0937 },
   ],
   'Salame': [
     // merma de corte 4.62% → factor 1/0.9538 = 1.0484
     { producto: 'Salame x 1.5kg', tipo: 'directo', kg_por_unid: 1.5 * 1.0484 },
     { producto: 'Salame x 500gr', tipo: 'directo', kg_por_unid: 0.5 * 1.0484 },
+    { producto: 'Salame x 1kg',    tipo: 'directo', kg_por_unid: 1.0 * 1.0484 },
   ],
   'Pepperoni': [
     { producto: 'Peperoni x 1 KG', tipo: 'directo', kg_por_unid: 1.0 },
@@ -2417,6 +2475,7 @@ const CONSUMO_MAP = {
     // Factor: 7/44 = 0.159 kg harina almendra por bollo (bollos de ~160g)
     { producto: 'Masa Piegatina - contenedor x 6 unidades', tipo: 'receta', kg_por_unid: 6 * (7/44) },
     { producto: 'Harina de Almendra x 5 kg',                tipo: 'directo', kg_por_unid: 5.0 },
+    { producto: 'Harina Almendra x 500gr',                  tipo: 'directo', kg_por_unid: 0.5 },
   ],
   'Hongo de Pino': [
     { producto: 'Reduccion Hongos 1kg',   tipo: 'receta', kg_por_unid: 0.3/0.95 },
@@ -2426,16 +2485,22 @@ const CONSUMO_MAP = {
     { producto: 'Dip Hummus de garbanzo x unidad', tipo: 'receta', kg_por_unid: (6*0.3)/27 },
   ],
   'Albahaca': [
-    { producto: 'Pesto verde x 300g',  tipo: 'receta', kg_por_unid: 1.2/45 },
-    { producto: 'Pesto verde x 500gr', tipo: 'receta', kg_por_unid: 1.2/45 },
+    // Compra en plantines: 1,2 kg desojada por prep. de 45 potes; 14 plantines rinden 0,5 kg útiles → 1,2/(0,5/14) ≈ 34 plantines por prep.
+    { producto: 'Pesto verde x 300g',  tipo: 'receta', kg_por_unid: 34/45 },
+    { producto: 'Dip Pesto x unidad',  tipo: 'receta', kg_por_unid: 34/45 },
+    { producto: 'Pesto verde x 500gr', tipo: 'receta', kg_por_unid: 34/45 },
+    // Albahaca x 50 gr (hoja útil): 50 g / (0,5 kg/14 plantines) = 1,4 plantines
+    { producto: 'Albahaca x 50gr',     tipo: 'directo', kg_por_unid: 0.05/(0.5/14) },
   ],
   'Rúcula': [
     { producto: 'Pesto verde x 300g',  tipo: 'receta', kg_por_unid: 0.6/45 },
+    { producto: 'Dip Pesto x unidad',  tipo: 'receta', kg_por_unid: 0.6/45 },
     { producto: 'Pesto verde x 500gr', tipo: 'receta', kg_por_unid: 0.6/45 },
   ],
   'Nueces': [
     { producto: 'Nueces x 500gr',      tipo: 'directo', kg_por_unid: 0.5 },
     { producto: 'Pesto verde x 300g',  tipo: 'receta',  kg_por_unid: 0.2/45 },
+    { producto: 'Dip Pesto x unidad',  tipo: 'receta',  kg_por_unid: 0.2/45 },
     { producto: 'Pesto verde x 500gr', tipo: 'receta',  kg_por_unid: 0.2/45 },
   ],
   'Ajo': [
@@ -2443,12 +2508,16 @@ const CONSUMO_MAP = {
     { producto: 'Pasta Ajo x500g',         tipo: 'receta', kg_por_unid: 9*0.05/4 },
     { producto: 'Dip Hummus de garbanzo x unidad', tipo: 'receta', kg_por_unid: (5*0.05)/27 },
     { producto: 'Pesto verde x 300g',      tipo: 'receta', kg_por_unid: (4*0.05)/45 },
+    { producto: 'Dip Pesto x unidad',      tipo: 'receta', kg_por_unid: (4*0.05)/45 },
     { producto: 'Pesto verde x 500gr',     tipo: 'receta', kg_por_unid: (4*0.05)/45 },
   ],
   'Aceite Girasol': [
     { producto: 'Dip Hummus de garbanzo x unidad', tipo: 'receta', kg_por_unid: 0.14/27 },
     { producto: 'Pasta de Ajo x 1 kg',    tipo: 'receta', kg_por_unid: 0.25/2 },
     { producto: 'Pasta Ajo x500g',         tipo: 'receta', kg_por_unid: 0.25/4 },
+    // Salsa Clásica: 115 g de aceite de girasol por preparación de 12 kg
+    { producto: 'Salsa Clasica x 3kg',     tipo: 'receta', kg_por_unid: (3/12)*0.115 },
+    { producto: 'Salsa Clasica x 7kg',     tipo: 'receta', kg_por_unid: (7/12)*0.115 },
   ],
 };
 
@@ -2467,6 +2536,12 @@ function renderBalance(regsCompras) {
   regsDespachos.forEach(r => {
     despachosProd[r.p] = (despachosProd[r.p] || 0) + r.q;
   });
+  const despachosPost = {};   // despachos desde el 01/07/2026 (receta 60/40)
+  regsDespachos.forEach(r => { if (r.f >= '2026-07-01') despachosPost[r.p] = (despachosPost[r.p] || 0) + r.q; });
+  function factorFecha(tag, post) {
+    const base = tag.startsWith('muzza') ? (post ? 2.4 : 2.8) : (post ? 1.6 : 1.2);   // kg por cajón de 4 kg
+    return tag.endsWith('_500') ? base / 8 : base;                                    // el x500gr es 1/8 del cajón
+  }
 
   // Para cada insumo en CONSUMO_MAP: calcular consumo teórico
   const resultados = [];
@@ -2495,10 +2570,13 @@ function renderBalance(regsCompras) {
     usos.forEach(uso => {
       const unidades = despachosProd[uso.producto] || 0;
       if (unidades === 0) return;
-      let kgUnid = uso.kg_por_unid;
-      if (kgUnid === 'muzza_factor') kgUnid = MUZZA_FACTOR;
-      if (kgUnid === 'cuarti_factor') kgUnid = CUARTI_FACTOR;
-      const consumo = unidades * kgUnid;
+      let consumo;
+      if (typeof uso.kg_por_unid === 'string') {
+        const up = despachosPost[uso.producto] || 0;
+        consumo = (unidades - up) * factorFecha(uso.kg_por_unid, false) + up * factorFecha(uso.kg_por_unid, true);
+      } else {
+        consumo = unidades * uso.kg_por_unid;
+      }
       if (uso.tipo === 'directo') {
         consumoDirecto += consumo;
         desglose.push({ prod: uso.producto, tipo: 'directo', unidades, consumo });
@@ -2530,7 +2608,10 @@ function renderBalance(regsCompras) {
   const thead = document.querySelector('#tbl-balance thead');
   const tbody = document.querySelector('#tbl-balance tbody');
   // Stock del período si existe
-  const stockData = (typeof COMPRAS_DATA !== 'undefined' && COMPRAS_DATA.stock) ? COMPRAS_DATA.stock : null;
+  const hastaStock = (document.getElementById('co-hasta').value || '').slice(0,7);
+  const stockData = (typeof COMPRAS_DATA !== 'undefined' && COMPRAS_DATA.stock && hastaStock === COMPRAS_DATA.stock.mes) ? COMPRAS_DATA.stock : null;
+  const notaEl = document.getElementById('balance-nota');
+  if (notaEl) notaEl.innerHTML = stockData ? '' : 'ℹ️ No hay conteo de stock cargado para el período seleccionado (el último es del ' + ((COMPRAS_DATA.stock||{}).fecha||'—') + '). Se muestra comprado vs. consumo teórico, que es orientativo.';
   const stockMap = {};
   if (stockData) stockData.items.forEach(s => { stockMap[s.insumo] = s; });
 
@@ -2548,7 +2629,7 @@ function renderBalance(regsCompras) {
   </tr>`;
 
   tbody.innerHTML = resultados.map(r => {
-    const sem = semaforo(r.ratio);
+    const sem = INCOMPLETOS[r.insumo] ? { color:'#777', label:'ℹ️ ' + INCOMPLETOS[r.insumo], bg:'#f4f4f4' } : semaforo(r.ratio);
     const ratioStr = r.ratio !== null ? r.ratio.toFixed(2) : '—';
     const stockItem = stockMap[r.insumo] || null;
     const stockKg = stockItem ? stockItem.total_kg : null;
